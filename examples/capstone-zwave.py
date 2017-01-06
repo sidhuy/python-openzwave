@@ -19,7 +19,7 @@ from openzwave.network import ZWaveNetwork
 from openzwave.option import ZWaveOption
 import time
 
-device="/dev/ttyACM0"
+device="/dev/ttyACM0" #find device
 log="None"
 sniff=300.0
 
@@ -38,7 +38,7 @@ options.lock()
 network = ZWaveNetwork(options, autostart=False)
 command = ZWaveNodeSwitch()
 
-network.start()
+network.start() #start the ZWave network
         
 #Start up the ZWave network (taken from /examples/hello_world.py)
 print("Network to start ")
@@ -55,9 +55,10 @@ tmp_off = 0
 tmp_on = 0
 flag = True
 
+#loop to take input from user, change the switch of the bulb, and output result to the user
 while(flag):
-    cmd = raw_input("Please enter command. \n")
-    cmd = cmd.upper()
+    cmd = raw_input("Please enter command. \n") #take input from the user - can be with or without "" ("ON", ON, on, On, oN, "OFF", off, ofF, oFf, Off, OFf, OfF, oFF)
+    cmd = cmd.upper() #capitalize letters
     cmd = cmd.replace('"', "")
     if (cmd == "ON" and tmp_on == 0):#command.get_switch_all_state(1) == False):
         print("Turn bulb on")
@@ -80,5 +81,6 @@ while(flag):
     else:
         print("Unknown Command")
 
+		
 print("Network to end")
-network.stop()
+network.stop() #Stop the ZWave network
